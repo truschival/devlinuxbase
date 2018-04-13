@@ -17,6 +17,7 @@ RUN apt-get update && \
 	gcc \
 	doxygen \
 	lcov \
+	gcovr \
 	autoconf \
 	automake \
 	libtool \
