@@ -33,7 +33,7 @@ RUN apt-get update && \
 	&& apt-get clean
 
 # Add a build user
-RUN useradd -m -s /bin/bash -G src,sudo -p xxx builduser
+RUN useradd -m -s /bin/bash -u 1001 -G src,sudo -p xxx builduser
 
 #Create user specific sudoers.d file
 RUN echo "builduser ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/builduser && \
