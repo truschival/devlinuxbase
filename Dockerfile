@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:11.2-slim
 LABEL maintainer="Thomas Ruschival <t.ruschival@gmail.com>"
 
 # Setup language environment and encoding 
