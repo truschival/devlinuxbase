@@ -1,40 +1,45 @@
-FROM debian:11.6-slim
-LABEL maintainer="Thomas Ruschival <t.ruschival@gmail.com>"
+FROM debian:trixie-slim
+LABEL maintainer="Thomas Ruschival <t.ruschival@gmail.com>" \
+      org.opencontainers.image.source="https://github.com/truschival/devlinuxbase"
 
-# Setup language environment and encoding 
-ENV LC_ALL C.UTF-8
-ENV LANG C.UTF-8
+# Setup language environment and encoding
+ENV LC_ALL=C.UTF-8 \
+    LANG=C.UTF-8 \
+    DEBIAN_FRONTEND=noninteractive
 
-# Update package cache and install devtools
+# Update package cache, upgrade existing packages, and install devtools
 RUN apt-get update && \
-	apt-get install -y \
-		autoconf \
-		automake \
-		bc \
-		bison \
-		build-essential \
-		cmake \
-		curl \
-		doxygen \
-		flex \
-		g++ \
-		gcc \
-		gcovr \
-		git \
-		lcov \
-		libssl-dev \
-		libtool \
-		pkg-config \
-		sudo \
-		unzip \
-		uuid-dev \
-		vim-tiny \
-		zip \
-	&& apt-get clean
+    apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends \
+        autoconf \
+        automake \
+        bc \
+        bison \
+        build-essential \
+        ca-certificates \
+        cmake \
+        curl \
+        doxygen \
+        flex \
+        g++ \
+        gcc \
+        gcovr \
+        git \
+        lcov \
+        libssl-dev \
+        libtool \
+        ninja-build \
+        pkgconf \
+        sudo \
+        unzip \
+        uuid-dev \
+        vim-tiny \
+        zip && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# Add a build user
-RUN useradd -m -s /bin/bash -u 1001 -G src,sudo -p xxx builduser
-
-#Create user specific sudoers.d file
-RUN echo "builduser ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/builduser && \
+# Add a build user with passwordless sudo access
+RUN useradd -m -s /bin/bash -u 1001 -G src,sudo builduser && \
+    passwd -d builduser && \
+    echo "builduser ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/builduser && \
     chmod 0440 /etc/sudoers.d/builduser

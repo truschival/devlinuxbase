@@ -1,3 +1,3 @@
-# Devlinuxbase
+# devlinuxbase
 
-Dockerfile for basic C++ development on GNU/Linux (Debian)
+Dockerfile for basic C++ development on GNU/Linux (Debian Trixie)
