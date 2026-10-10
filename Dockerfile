@@ -1,5 +1,6 @@
 FROM debian:trixie-slim
-LABEL maintainer="Thomas Ruschival <t.ruschival@gmail.com>"
+LABEL maintainer="Thomas Ruschival <t.ruschival@gmail.com>" \
+      org.opencontainers.image.source="https://github.com/truschival/devlinuxbase"
 
 # Setup language environment and encoding
 ENV LC_ALL=C.UTF-8 \
