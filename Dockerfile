@@ -6,8 +6,9 @@ ENV LC_ALL=C.UTF-8 \
     LANG=C.UTF-8 \
     DEBIAN_FRONTEND=noninteractive
 
-# Update package cache and install devtools
+# Update package cache, upgrade existing packages, and install devtools
 RUN apt-get update && \
+    apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
         autoconf \
         automake \
